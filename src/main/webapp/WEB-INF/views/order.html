@@ -25,21 +25,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${order != null}">
-            <td><span th:text="${order.id}">id</span></td>
-            <td><span th:text="${order.title}">title</span></td>
-            <td><span th:text="${order.price}">price</span></td>
-            <td><span th:text="${order.user.firstName}+' '+${order.user.lastName}">user</span></td>
-        </tr>
 
-        <tr th:unless="${order == null}" th:each="order:${orders}">
-            <td><span th:text="${order.id}">id</span></td>
-            <td><span th:text="${order.title}">title</span></td>
-            <td><span th:text="${order.price}">price</span></td>
-            <td><span th:text="${order.user.firstName}+' '+${order.user.lastName}">user</span></td>
+        <tr th:each="order:${orders}" th:object="${order}">
+            <td><span th:text="*{id}">id</span></td>
+            <td><span th:text="*{title}">title</span></td>
+            <td><span th:text="*{#numbers.formatDecimal(price, 1, 'DEFAULT', 2, 'DEFAULT')}">price</span></td>
+            <!--<td><span th:text="*{#numbers.formatCurrency(price)}">price</span></td> tutaj pojawi się też znanacznik waluty uzależniony od locale - ale o locale będzie przy okazji boota-->
+            <td><span th:text="*{user.firstName}+' '+*{user.lastName}">fullName</span></td>
         </tr>
         </tbody>
     </table>
+    <a href="add" class="btn btn-success">Add</a>
 </div>
 </body>
 </html>

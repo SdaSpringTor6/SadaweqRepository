@@ -9,9 +9,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.annotation.SessionScope;
+
+import javax.annotation.PostConstruct;
 
 @Controller
+@SessionScope
 public class UserController {
+
+    @PostConstruct
+    public void init(){
+        System.out.println("zainicjalizowałem strone");
+    }
+
+
 
     @Autowired
     UserDAO userDao;
@@ -31,7 +42,6 @@ public class UserController {
         model.addAttribute("user", new User());
         return "post";
     }
-    //    @RequestMapping(method = RequestMethod.POST)
     @PostMapping("/save")
     public String postAction(User user){
         user.setId(5);

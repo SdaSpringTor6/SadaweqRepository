@@ -28,4 +28,7 @@ public class OrderDAO {
         return orders;
     }
 
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
 }
